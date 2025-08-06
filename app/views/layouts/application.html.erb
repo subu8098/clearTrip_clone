@@ -66,7 +66,7 @@
     .search-box {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 30px;
       width: 910px;
       max-width: 98vw;
       margin: 0 auto 0 0;
@@ -126,7 +126,7 @@
       transition: background 0.17s;
       cursor: pointer;
     }
-    .search-btn:hover { background: #fa9500; }
+    .search-btn:hover { background: #0057faff; }
     .breadcrumb {
       font-size: 13.3px;
       color: #1c8ef8ff;
@@ -142,14 +142,14 @@
       text-decoration: none;
       cursor: default;
       pointer-events: none;
-      margin-top: -10px;
+      margin-top: 1px;
     }
     .breadcrumb a:visited { color: #888; }
-    .breadcrumb a:hover { text-decoration: none; color: #f85a1cff;}
+    .breadcrumb a:hover { text-decoration: underline; color: #f85a1cff;}
     .line-separator {
       border: none; 
       backgrond-color: #e2e2e2;
-      margin: 0 0 -30px 8px;
+      margin: 0 0 -20px 8px;
       width: 910px;
       max-width: 98vw;
       display: block;
@@ -173,7 +173,8 @@
       font-size: 15.3px;
       max-width: 98%;
     }
-    .section { margin-bottom: 29px; }
+    .section { margin-bottom: 29px; margin-left: -5px;}
+    
     ol, ul { color: #454545; font-size: 15.2px; margin: 0.7em 0 0.4em 0; }
     .section ul, .section ol { margin-left: 1.25em; }
     .info-table {
@@ -258,7 +259,9 @@
     .footer-zone {
       background: #f7f7f7;
       margin-top: 1px;
-      padding: 34px 0 0 0;
+      padding: 10px 0 0 20px;
+      margin-left: -40px;
+      margin-right: -40px;
       border-top: 1px solid #ececec;
       width: auto;
       min-width: 740px;
@@ -275,7 +278,8 @@
     .footer-section-title {
       color: #0e0202ff;
       font-weight: 700;
-      font-size: 12px;  display: inline; margin-left: 1px;
+      font-size: 13px;  display: inline; margin-left: 1px;
+      font-family: sans-serif;
     }
     .footer-links a {
       color: #4d75bc; text-decoration: underline dashed; margin-right: 4px; font-size: 12px;
@@ -340,7 +344,7 @@
         </svg>
       </button>
       <input type="text" placeholder="Any Airport or City">
-      <input type="text" placeholder="04/10/2025" style="font-weight:600;">
+      <input type="date" style="font-weight:100;">
       <input type="text" placeholder="Return On">
       <select>
         <option selected>04 Travellers</option>
@@ -354,7 +358,7 @@
     </div>
   </div>
 
-  <div class="breadcrumb">
+  <div class="breadcrumb" >
     Home &raquo; Tourism &raquo; Ipoh Airports
   </div>
   <hr class="line-separator">
