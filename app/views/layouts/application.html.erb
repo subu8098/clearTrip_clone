@@ -4,7 +4,6 @@
   <title>Ipoh Airport - Cleartrip</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -14,9 +13,7 @@
       font-family: sans-serif;
       box-sizing: border-box;
     }
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
+    *, *:before, *:after { box-sizing: inherit; }
     body {
       font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,Liberation Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
       font-size: 14px;
@@ -34,13 +31,10 @@
       margin-block-end: 0.5em;
       margin-block-start: 0.5em;
     }
-    h1 {
-      font-size: 2.14rem;
-      margin: 22px 0 9px 8px;
-      padding-left: 2px;
-    }
+    h1 { font-size: 2.14rem; margin: 22px 0 9px 8px; padding-left: 2px; }
     h2 { font-size: 2.14rem; margin: 22px 0 9px 0; }
     h3 { font-size: 15px; margin: 17px 0 8px 0; color: #000; letter-spacing: .02em; font-weight: 700;}
+
     /* TOPBAR */
     .topbar {
       display: flex;
@@ -49,15 +43,36 @@
       border-bottom: 1px solid #e6e6e6;
       padding: 13px 0 13px 0;
       background: #fff;
-      
+      position: relative;
     }
     .top-left img { height: 24px; margin-right: 10px;cursor: pointer;}
     .top-left { display: flex; align-items: center; margin-left: 8px; }
-    .top-right {
-      margin-right: 40px;
-    }
+    .top-right { margin-right: 40px; position: relative; }
     .flag-circle { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; border: 1px solid #ccc; display: inline-block; cursor: pointer;}
-    #country-select { display: none; }
+    /* Country flag custom dropdown */
+    .country-dropdown {
+      padding: 8px 0;
+      box-shadow: 0 6px 18px #0001;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      position: absolute;
+      right: 0px;
+      top: 36px;
+      z-index: 1000;
+      min-width: 140px;
+      display: none;
+    }
+    .country-option {
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background .18s;
+    }
+    .country-option:hover { background: #f3f6fa; }
+
     /* SEARCH BAR */
     .bento-search-widget {
       padding: 0 0 15px 0;
@@ -139,7 +154,6 @@
       padding-left: 0;
       font-weight: 400;
       letter-spacing: 0.03em;
-      /* Remove all decorations/links */
     }
     .breadcrumb a, .breadcrumb {
       color: #a3a6a8ff;
@@ -179,7 +193,6 @@
       font-family:arial, sans-serif;
     }
     .section { margin-bottom: 29px; margin-left: -5px;}
-
     ol, ul { color: #454545; font-size: 15.2px; margin: 0.7em 0 0.4em 0; }
     .section ul, .section ol { margin-left: 1.25em; }
     .info-table {
@@ -228,7 +241,6 @@
       font-size: 12px;
     }
     .sidebar ul li { margin-bottom: 6px; }
-    /* AIRLINE LIST CSS */
     .sidebar-airlines-list {
       list-style: none;
       padding: 0;
@@ -246,7 +258,7 @@
     .sidebar-airline-logo img {
       width: 35px;
       height: 35px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 6px;
       background: #fff;
       border: 1px solid #ddebf4;
@@ -281,16 +293,13 @@
       line-height: 1.8;
       padding: 0 15px 0 8px;
     }
-    .foot{
-    margin-left:15px
-    }
+    .foot{ margin-left:15px }
     .footer-section-title {
       color: #0e0202ff;
       font-weight: 700;
       font-size: 13px;  display: inline; margin-left: 1px;
       font-family: sans-serif;
     }
-    
     .bottom-footer {
       display: flex;
       justify-content: space-between;
@@ -304,7 +313,9 @@
       letter-spacing: .01em;
     }
     .bottom-footer a { color: #213; margin-left: 1px; font-size: 12px;}
-    
+    /* [Responsive & mobile-specific CSS here - unchanged] */
+    /* ... */
+
     /* FOR MOBILE VIEW WE CAN USE BELOW LOGIC */
 
 
@@ -344,6 +355,21 @@
     width: 100% !important;
   }
  
+ /* Restrict airline logo size and prevent stretching */
+.sidebar-airline-logo img {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important; 
+  min-width: 32px !important;
+  min-height: 32px !important;  
+  
+  border-radius: 6px !important; 
+  object-fit: contain !important; /* Keeps aspect ratio, adds whitespace if needed */
+}
+
+ 
+
   .footer-zone {
     width: 100vw !important;
     min-width: 0 !important;
@@ -355,8 +381,7 @@
     }
 }
 
-/* [MOBILE] Mobile-first: stack search-box fields vertically under 700px */
-@media (max-width: 700px) {
+    @media (max-width: 700px) {
   .search-box {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -409,89 +434,114 @@
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="top-left">
-      <%= image_tag 'logo.png', alt: 'Cleartrip Logo' %>
-      <%= image_tag 'flight.png', alt: 'Flights' %>
-      <%= image_tag 'hotel.png', alt: 'Hotels' %>
-      <%= image_tag 'discount.png', alt: 'Discounts' %>
+<div class="topbar">
+  <div class="top-left">
+    <%= image_tag 'logo.png', alt: 'Cleartrip Logo' %>
+    <%= image_tag 'flight.png', alt: 'Flights' %>
+    <%= image_tag 'hotel.png', alt: 'Hotels' %>
+    <%= image_tag 'discount.png', alt: 'Discounts' %>
+  </div>
+  <div class="top-right">
+    <div class="flag-circle" id="selected-flag" tabindex="0">
+      <img src="<%= asset_path 'uae-flag.png' %>" id="country-flag" alt="Country Flag" style="width:100%;height:100%;object-fit:cover;">
     </div>
-    <div class="top-right">
-      <div class="flag-circle" onclick="toggleCountrySelect()">
-        <%= image_tag 'uae-flag.png', id: 'country-flag', alt: 'Country Flag', style: 'width:100%;height:100%;object-fit:cover;' %>
+    <div class="country-dropdown" id="country-dropdown">
+      <div class="country-option" data-flag="<%= asset_path 'uae-flag.png' %>">
+        <img src="<%= asset_path 'uae-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">UAE
       </div>
-      <select id="country-select" onchange="updateFlag()">
-        <option value="<%= asset_path('uae-flag.png') %>" selected>UAE</option>
-        <option value="<%= asset_path('india-flag.png') %>">India</option>
-        <option value="<%= asset_path('saudi-flag.png') %>">Saudi Arabia</option>
-        <option value="<%= asset_path('oman-flag.png') %>">Oman</option>
-      </select>
+      <div class="country-option" data-flag="<%= asset_path 'india-flag.png' %>">
+        <img src="<%= asset_path 'india-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">India
+      </div>
+      <div class="country-option" data-flag="<%= asset_path 'saudi-flag.png' %>">
+        <img src="<%= asset_path 'saudi-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">Saudi Arabia
+      </div>
+      <div class="country-option" data-flag="<%= asset_path 'oman-flag.png' %>">
+        <img src="<%= asset_path 'oman-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">Oman
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="bento-search-widget">
-    <div class="search-box">
-      <select>
-        <option selected>One way</option>
-        <option>Round trip</option>
-      </select>
-      <input type="text" id="input-from" placeholder="Any Airport or City">
-          <button class="swap-btn" type="button" aria-label="Swap" onclick ="swapInputs()">
-            <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
-              <!-- Top Line: arrow points RIGHT -->
-              <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
-              <polyline points="20,4 24,7 20,10" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
-              
-              <!-- Bottom Line: arrow points LEFT -->
-              <line x1="24" y1="13" x2="4" y2="13" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
-              <polyline points="8,10 4,13 8,16" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-
-      <input type="text" id="input-to" placeholder="Any Airport or City">
-      <input type="date" style="font-weight:100;">
-      <input type="text" placeholder="Return On">
-      <select>
-        <option selected>01 Traveller</option>
-        <%# <option>01 Traveller</option> %>
-        <option>02 Travellers</option>
-        <option>03 Travellers</option>
-        <option>04 Travellers</option>
-        <option>05 Travellers</option>
-      </select>
-      <button class="search-btn">Search</button>
-    </div>
+<div class="bento-search-widget">
+  <div class="search-box">
+    <select id="flight-type">
+      <option selected>One way</option>
+      <option>Round trip</option>
+    </select>
+    <input type="text" id="input-from" placeholder="Any Airport or City">
+    <button class="swap-btn" type="button" aria-label="Swap" onclick="swapInputs()">
+      <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
+        <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+        <polyline points="20,4 24,7 20,10" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+        <line x1="24" y1="13" x2="4" y2="13" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+        <polyline points="8,10 4,13 8,16" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <input type="text" id="input-to" placeholder="Any Airport or City">
+    <input type="date" style="font-weight:100;">
+    <input type="text" id="return-date" placeholder="Return On">
+    <script>
+      function toggleReturnDate() {
+        var flightType = document.getElementById("flight-type").value;
+        var returnDate = document.getElementById("return-date");
+        if (flightType === "One way") {
+          returnDate.disabled = true;
+          returnDate.value = "";
+          returnDate.placeholder = "Return On";
+          returnDate.type = "text";
+        } else {
+          returnDate.disabled = false;
+          returnDate.type = "date";
+          returnDate.placeholder = "";
+        }
+      }
+      toggleReturnDate();
+      document.getElementById("flight-type").addEventListener("change", toggleReturnDate);
+    </script>
+    <select>
+      <option selected>01 Traveller</option>
+      <%# <option>01 Traveller</option> %>
+      <option>02 Travellers</option>
+      <option>03 Travellers</option>
+      <option>04 Travellers</option>
+      <option>05 Travellers</option>
+    </select>
+    <button class="search-btn">Search</button>
   </div>
+</div>
 
-  <div class="breadcrumb" >
-    Home &raquo; Tourism &raquo; Ipoh Airports
-  </div>
-  <hr class="line-separator">
+<div class="breadcrumb" >
+  Home &raquo; Tourism &raquo; Ipoh Airports
+</div>
+<hr class="line-separator">
 
-  <%= yield %>
+<%= yield %>
 
-  <script>
-    function updateFlag() {
-      const select = document.getElementById("country-select");
-      const selectedFlag = select.value;
-      document.getElementById("country-flag").src = selectedFlag;
-      select.style.display = "none";
-    }
-    function toggleCountrySelect() {
-      const select = document.getElementById("country-select");
-      select.style.display = select.style.display === "none" ? "inline-block" : "none";
-    }
-    
+<script>
+  // FLAG SELECTOR FUNCTIONALITY
+  document.getElementById('selected-flag').addEventListener('click', function(e) {
+    e.stopPropagation();
+    var drop = document.getElementById('country-dropdown');
+    drop.style.display = (drop.style.display === 'none' || drop.style.display === '') ? 'block' : 'none';
+  });
+  document.querySelectorAll('.country-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      var flag = this.getAttribute('data-flag');
+      document.getElementById('country-flag').src = flag;
+      document.getElementById('country-dropdown').style.display = 'none';
+    });
+  });
+  document.addEventListener('click', function(e) {
+    document.getElementById('country-dropdown').style.display = 'none';
+  });
+
   function swapInputs() {
     var inputFrom = document.getElementById('input-from');
     var inputTo = document.getElementById('input-to');
-    // Temporary variable to hold one value
     var temp = inputFrom.value;
     inputFrom.value = inputTo.value;
     inputTo.value = temp;
   }
-
-
-  </script>
+</script>
 </body>
 </html>
