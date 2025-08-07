@@ -66,7 +66,7 @@
     </div>
     <div class="section">
       <h2>Information Of Ipoh Airport</h2>
-      <table class="info-table">
+      <table class="info-table" ,style="height: 100%;">
         <tr><td>IATA Code</td><td>IPH</td></tr>
         <tr><td>Country</td><td>Malaysia</td></tr>
         <tr><td>Name</td><td>Sultan Azlan Shah Airport</td></tr>
@@ -123,6 +123,45 @@
         <a class="sidebar-airline-name" href="#">Qatar Airways</a>
       </li>
      
+      <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'airindia.png', alt: 'Air India' %></span>
+        <a class="sidebar-airline-name" href="#">Air India</a>
+      </li>
+
+       <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'egyptair.png', alt: 'EgyptAir' %></span>
+        <a class="sidebar-airline-name" href="#">EgyptAir</a>
+      </li>
+
+       <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'etihad.png', alt: 'Etihad Airways' %></span>
+        <a class="sidebar-airline-name" href="#">Etihad Airways</a>
+      </li>
+
+       <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'spicejet.png', alt: 'SpiceJet' %></span>
+        <a class="sidebar-airline-name" href="#">SpiceJet</a>
+      </li>
+
+       <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'turkish.png', alt: 'Turkish Airlines' %></span>
+        <a class="sidebar-airline-name" href="#">Turkish Airlines</a>
+      </li>
+
+      <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'goair.png', alt: 'GoAir Airlines' %></span>
+        <a class="sidebar-airline-name" href="#">GoAir Airlines</a>
+      </li>
+
+      <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'gulfair.png', alt: 'Gulf Air' %></span>
+        <a class="sidebar-airline-name" href="#">Gulf Air</a>
+      </li>
+      <li>
+        <span class="sidebar-airline-logo"><%= image_tag 'oman.png', alt: 'Oman Air' %></span>
+        <a class="sidebar-airline-name" href="#">Oman Air</a>
+      </li>
+
     </ul>
   </div>
 </div>
@@ -148,42 +187,3 @@
     <div><a href="#">Privacy</a> | <a href="#">Terms of Use</a></div>
   </div>
 </div>
-
-<!-- Airline sidebar CSS (if not already in layout/application.html.erb) -->
-<style>
-.sidebar-airlines-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 8px 0;
-}
-.sidebar-airlines-list li {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 2px 0;
-  font-size: 14.2px;
-  color: #252c3f;
-  font-weight: 500;
-}
-.sidebar-airline-logo img {
-  width: 35px;
-  height: 35px;
-  object-fit: cover;
-  border-radius: 6px;
-  background: #fff;
-  border: 1px solid #e2e6ee;
-  padding: 2px;
-  box-sizing: border-box;
-}
-.sidebar-airline-name {
-  margin-left: 0px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #2066c0;
-  text-decoration: none;
-}
-.sidebar-airline-name:hover { text-decoration: underline; }
-.foot{
-    margin-left:15px
-}
-</style>

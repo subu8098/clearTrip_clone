@@ -46,8 +46,9 @@
       border-bottom: 1px solid #e6e6e6;
       padding: 13px 0 13px 0;
       background: #fff;
+      
     }
-    .top-left img { height: 24px; margin-right: 10px;}
+    .top-left img { height: 24px; margin-right: 10px;cursor: pointer;}
     .top-left { display: flex; align-items: center; margin-left: 8px; }
     .top-right {
       margin-right: 40px;
@@ -56,7 +57,7 @@
     #country-select { display: none; }
     /* SEARCH BAR */
     .bento-search-widget {
-      padding: 0 0 24px 0;
+      padding: 0 0 20px 0;
       border-bottom: 1px solid #e6e6e6;
       background: #fff;
       position: relative;
@@ -71,10 +72,10 @@
       max-width: 98vw;
       margin: 0 auto 0 0;
       background: none;
-      padding: 0;
+      padding: 0; 
     }
     .search-box select,
-    .search-box input[type="text"] {
+    .search-box input[type="text"], .search-box input[type="date"] {
       border: 1px solid #e5e6eb;
       background: #fff;
       border-radius: 4px;
@@ -100,15 +101,15 @@
       height: 38px;
       width: 44px;
       border: none;
-      background: #f6f6fa;
+      background: #fffdfde5;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 4px;
       padding: 0;
-      margin: 0 0 0 2px;
+      margin: 0 -7px 0 -7px;
       cursor: pointer;
-      border: 1px solid #e5e6eb;
+      border: 0 solid #e5e6eb;
     }
     .swap-btn svg { display: block; }
     .search-btn {
@@ -138,17 +139,17 @@
       /* Remove all decorations/links */
     }
     .breadcrumb a, .breadcrumb {
-      color: #1c8ef8ff;
+      color: #a3a6a8ff;
       text-decoration: none;
       cursor: default;
       pointer-events: none;
       margin-top: 1px;
     }
     .breadcrumb a:visited { color: #888; }
-    .breadcrumb a:hover { text-decoration: underline; color: #f85a1cff;}
+    .breadcrumb a:hover { text-decoration: underline; color: #f85a1cff;cursor:pointer;}
     .line-separator {
       border: none; 
-      backgrond-color: #e2e2e2;
+      background-color: #e2e2e2;
       margin: 0 0 -20px 8px;
       width: 910px;
       max-width: 98vw;
@@ -156,12 +157,12 @@
     }
     .main-area {
       display: flex;
-      gap: 40px;
+      gap: 60px;
       margin: 0 auto;
       width: 97%;
       max-width: 1150px;
     }
-    .content   { width: 70%; max-width: 800px;}
+    .content   { width: 80%; max-width: 900px;}
     .sidebar   { width: 28%; min-width: 250px; }
     .highlight {
       background: #fffbe6;
@@ -169,18 +170,20 @@
       border-left: 4px solid #ffe58f;
       border-radius: 6px;
       margin: 0 0 25px 8px;
-      padding: 17px 28px 13px 15px;
+      padding: 17px 18px 13px 15px;
       font-size: 15.3px;
-      max-width: 98%;
+      max-width: 100%;
+      font-family:arial, sans-serif;
     }
     .section { margin-bottom: 29px; margin-left: -5px;}
-    
+
     ol, ul { color: #454545; font-size: 15.2px; margin: 0.7em 0 0.4em 0; }
     .section ul, .section ol { margin-left: 1.25em; }
     .info-table {
-      border-collapse: separate;
+      border-collapse: collapse;
       border-spacing: 0;
       width: 100%;
+      height:100%;
       font-size: 15.4px;
       border: 1.7px solid #b5b5b5;
       background: #fff;
@@ -189,7 +192,7 @@
       box-shadow: 0 2px 6px #edece5;
     }
     .info-table th, .info-table td {
-      border-bottom: 1px dotted #d6d6d6;
+      border: 1px dotted #131111ff;
       padding: 9px 12px 9px 13px;
       color: #393939;
       font-weight: 400;
@@ -199,7 +202,7 @@
     .info-table td:first-child {
       background: #fafafc;
       color: #686868;
-      font-weight: 500;
+      font-weight: 1000;
       width: 130px;
     }
     .sidebar img {
@@ -231,17 +234,17 @@
     .sidebar-airlines-list li {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px;
       padding: 2px 0;
-      font-size: 14px;
+      font-size: 14.2px;
       color: #26315a;
       font-weight: 500;
     }
     .sidebar-airline-logo img {
-      width: 20px;
-      height: 22px;
-      object-fit: contain;
-      border-radius: 4px;
+      width: 35px;
+      height: 35px;
+      object-fit: cover;
+      border-radius: 6px;
       background: #fff;
       border: 1px solid #ddebf4;
       padding: 2px;
@@ -250,7 +253,7 @@
     }
     .sidebar-airline-name {
       margin-left: 0;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
       color: #333cb0;
       text-decoration: none;
@@ -275,15 +278,16 @@
       line-height: 1.8;
       padding: 0 15px 0 8px;
     }
+    .foot{
+    margin-left:15px
+    }
     .footer-section-title {
       color: #0e0202ff;
       font-weight: 700;
       font-size: 13px;  display: inline; margin-left: 1px;
       font-family: sans-serif;
     }
-    .footer-links a {
-      color: #4d75bc; text-decoration: underline dashed; margin-right: 4px; font-size: 12px;
-    }
+    
     .bottom-footer {
       display: flex;
       justify-content: space-between;
@@ -332,18 +336,20 @@
         <option selected>One way</option>
         <option>Round trip</option>
       </select>
-      <input type="text" placeholder="Any Airport or City">
-      <button class="swap-btn" type="button" tabindex="-1" aria-label="Swap">
-        <!-- Horizontal double arrow icon (matches Cleartrip) -->
-        <svg width="20" height="18" viewBox="0 0 20 18">
-          <g>
-            <line x1="2" y1="9" x2="18" y2="9" style="stroke:#89a;stroke-width:2;stroke-linecap:round"/>
-            <polyline points="14,5 18,9 14,13" style="fill:none;stroke:#89a;stroke-width:2;stroke-linecap:round"/>
-            <polyline points="6,5 2,9 6,13" style="fill:none;stroke:#89a;stroke-width:2;stroke-linecap:round"/>
-          </g>
-        </svg>
-      </button>
-      <input type="text" placeholder="Any Airport or City">
+      <input type="text" id="input-from" placeholder="Any Airport or City">
+          <button class="swap-btn" type="button" aria-label="Swap" onclick ="swapInputs()">
+            <svg width="35" height="20" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+              <!-- Top Line: arrow points RIGHT -->
+              <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="20,4 24,7 20,10" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+              
+              <!-- Bottom Line: arrow points LEFT -->
+              <line x1="24" y1="13" x2="4" y2="13" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+              <polyline points="8,10 4,13 8,16" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+      <input type="text" id="input-to" placeholder="Any Airport or City">
       <input type="date" style="font-weight:100;">
       <input type="text" placeholder="Return On">
       <select>
@@ -376,6 +382,17 @@
       const select = document.getElementById("country-select");
       select.style.display = select.style.display === "none" ? "inline-block" : "none";
     }
+    
+  function swapInputs() {
+    var inputFrom = document.getElementById('input-from');
+    var inputTo = document.getElementById('input-to');
+    // Temporary variable to hold one value
+    var temp = inputFrom.value;
+    inputFrom.value = inputTo.value;
+    inputTo.value = temp;
+  }
+
+
   </script>
 </body>
 </html>
