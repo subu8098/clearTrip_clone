@@ -3,6 +3,9 @@
 <head>
   <title>Ipoh Airport - Cleartrip</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <style>
@@ -62,13 +65,13 @@
       background: #fff;
       position: relative;
       max-width: 100%;
-      margin: 10px;
+      margin: 0 auto 0 0; 
     }
     .search-box {
       display: flex;
       align-items: center;
       gap: 30px;
-      width: 910px;
+      width: 100%;
       max-width: 98vw;
       margin: 0 auto 0 0;
       background: none;
@@ -301,12 +304,108 @@
       letter-spacing: .01em;
     }
     .bottom-footer a { color: #213; margin-left: 1px; font-size: 12px;}
-    @media (max-width: 1000px) {
-      .search-box, .breadcrumb, .line-separator, h1, h2, h3 { width:98vw; min-width:0; max-width:100vw; padding-left:3vw;}
-      .main-area { flex-direction: column; width: 99vw; max-width: 100vw;}
-      .sidebar img { min-width: 140px; max-width: 100%; }
-      .sidebar, .content { width: 100%; }
+    
+    /* FOR MOBILE VIEW WE CAN USE BELOW LOGIC */
+
+
+    @media (max-width: 1150px) {
+  .search-box, .breadcrumb, .line-separator, h1, h2, h3, .content,.section,.sidebar,.sidebar ul{
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 10px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 2vw !important;
+    
+  }
+ 
+  .sidebar-airline-logo img {
+    width: 22px !important;
+    height: 22px !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+    margin-top: 2px !important;
+    padding: 1px !important;
+  
+}
+  .main-area {
+    flex-direction: column !important;
+    width: 99vw !important;
+    max-width: 100vw !important;
+    gap: 0 !important;
+  }
+  .sidebar img {
+    min-width: 140px !important;
+    max-width: 100% !important;
+    margin-top: 5px !important;
+  }
+  .sidebar, .content {
+    width: 100% !important;
+  }
+ 
+  .footer-zone {
+    width: 100vw !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+    padding-left: 2vw !important;
+    padding-right: 0 !important;
     }
+}
+
+/* [MOBILE] Mobile-first: stack search-box fields vertically under 700px */
+@media (max-width: 700px) {
+  .search-box {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 98vw !important;
+    margin: 0 auto !important;
+    padding: 0 2vw !important;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px #e4e2ed55;
+    box-sizing: border-box;
+    
+
+  }
+  .search-box select,
+  .search-box input[type="text"],
+  .search-box input[type="date"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-right: 0 !important;
+    font-size: 12px !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .swap-btn {
+    
+    align-self: center !important; /* centers the swap button vertically */
+    width: 40px !important;
+    margin: 0 0 0 0 !important;
+    border: 2px solid #e5e6eb !important;
+    border-radius: 50% !important;
+  }
+  .search-btn {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.2rem !important;
+    padding: 0.7em 0 !important;
+    margin-left: 0 !important;
+    margin-top: 8px !important;
+  }
+  .bento-search-widget {
+    padding: 6px 0 18px 0 !important;
+    margin: 3px 0 !important;
+    border-radius: 10px !important;
+    border-bottom: 0.5px solid #eee !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -338,7 +437,7 @@
       </select>
       <input type="text" id="input-from" placeholder="Any Airport or City">
           <button class="swap-btn" type="button" aria-label="Swap" onclick ="swapInputs()">
-            <svg width="35" height="20" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+            <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
               <!-- Top Line: arrow points RIGHT -->
               <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
               <polyline points="20,4 24,7 20,10" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
@@ -353,8 +452,8 @@
       <input type="date" style="font-weight:100;">
       <input type="text" placeholder="Return On">
       <select>
-        <option selected>04 Travellers</option>
-        <option>01 Traveller</option>
+        <option selected>01 Traveller</option>
+        <%# <option>01 Traveller</option> %>
         <option>02 Travellers</option>
         <option>03 Travellers</option>
         <option>04 Travellers</option>
