@@ -71,7 +71,7 @@
       font-size: 15px;
       transition: background .18s;
     }
-    .country-option:hover { background: #f3f6fa; }
+    .country-option:hover { background: #c2dafaff; }
 
     /* SEARCH BAR */
     .bento-search-widget {
@@ -85,7 +85,7 @@
     .search-box {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 25px;
       width: 100%;
       max-width: 98vw;
       margin: 8px auto 0 0;
@@ -139,8 +139,8 @@
       font-size: 1.63rem;
       height: 42px;
       min-width: 108px;
-      margin-left: 8px;
-      padding: 0 32px;
+      margin-left: 3px;
+      padding: 0 25px;
       letter-spacing: 0.01em;
       transition: background 0.17s;
       cursor: pointer;
@@ -443,20 +443,21 @@
   </div>
   <div class="top-right">
     <div class="flag-circle" id="selected-flag" tabindex="0">
-      <img src="<%= asset_path 'uae-flag.png' %>" id="country-flag" alt="Country Flag" style="width:100%;height:100%;object-fit:cover;">
+    <%= image_tag 'uae-flag.png', id: 'country-flag', alt: 'Country Flag', style: 'width:100%;height:100%;object-fit:cover;' %>
+      <%# <img src="<%= asset_path 'uae-flag.png'" id="country-flag" alt="Country Flag" style="width:100%;height:100%;object-fit:cover;"> %> %>
     </div>
     <div class="country-dropdown" id="country-dropdown">
       <div class="country-option" data-flag="<%= asset_path 'uae-flag.png' %>">
-        <img src="<%= asset_path 'uae-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">UAE
+          <img src="<%= asset_path 'uae-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:20px;">UAE
       </div>
       <div class="country-option" data-flag="<%= asset_path 'india-flag.png' %>">
-        <img src="<%= asset_path 'india-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">India
+         <img src="<%= asset_path 'india-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:20px;">India
       </div>
       <div class="country-option" data-flag="<%= asset_path 'saudi-flag.png' %>">
-        <img src="<%= asset_path 'saudi-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">Saudi Arabia
+          <img src="<%= asset_path 'saudi-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:20px;">Saudi Arabia
       </div>
       <div class="country-option" data-flag="<%= asset_path 'oman-flag.png' %>">
-        <img src="<%= asset_path 'oman-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:9px;">Oman
+        <img src="<%= asset_path 'oman-flag.png' %>" style="width:26px;height:26px;border-radius:50%;margin-right:20px;">Oman
       </div>
     </div>
   </div>
@@ -468,7 +469,30 @@
       <option selected>One way</option>
       <option>Round trip</option>
     </select>
-    <input type="text" id="input-from" placeholder="Any Airport or City">
+    <input list="airports" id="input-from" placeholder="Any Airport or City">
+    <datalist id="airports">
+      <option value="Abu Dhabi">
+      <option value="Bahrain, BH - Bahrain">
+      <option value="Dammam, SA - King Fahad">
+      <option value="Doha, QA - Doha">
+      <option value="Jeddah, SA - Jeddah">
+      <option value="Kuwait, KW - Kuwait">
+      <option value="Muscat, OM - Seeb">
+      <option value="Riyadh, SA - King Khaled">
+      <option value="Sharjah, AE - Sharjah">
+      <option value="Salem, IN - Salem">
+      <option value="San Salvador, SV - Comalapa">
+      <option value="Salt Lake City, US - Salt Lake City">
+      <option value="Salzburg, AT - W A Mozart">
+      <option value="Salvador, BR - Luis E Magalhaes">
+      <option value="Salisbury-ocean City, US - Wicomico Regional">
+      <option value="Saltillo, MX - Saltillo">
+      <option value="Salta, AR - Salta">
+      <option value="Salluit, CA - Salluit">
+      <option value="Salalah, OM - Salalah">  <option value="Coimbatore, IN - Peelamedu">
+      <option value="Geneva, CH - Geneve Cointrin">
+
+    </datalist>
     <button class="swap-btn" type="button" aria-label="Swap" onclick="swapInputs()">
       <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
         <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
@@ -477,7 +501,7 @@
         <polyline points="8,10 4,13 8,16" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </button>
-    <input type="text" id="input-to" placeholder="Any Airport or City">
+    <input list="airports" id="input-to" placeholder="Any Airport or City">
     <input type="date" style="font-weight:100;">
     <input type="text" id="return-date" placeholder="Return On">
     <script>
