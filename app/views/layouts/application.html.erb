@@ -433,6 +433,9 @@
 
   </style>
 </head>
+
+
+
 <body>
 <div class="topbar">
   <div class="top-left">
@@ -470,29 +473,12 @@
       <option>Round trip</option>
     </select>
     <input list="airports" id="input-from" placeholder="Any Airport or City">
-    <datalist id="airports">
-      <option value="Abu Dhabi">
-      <option value="Bahrain, BH - Bahrain">
-      <option value="Dammam, SA - King Fahad">
-      <option value="Doha, QA - Doha">
-      <option value="Jeddah, SA - Jeddah">
-      <option value="Kuwait, KW - Kuwait">
-      <option value="Muscat, OM - Seeb">
-      <option value="Riyadh, SA - King Khaled">
-      <option value="Sharjah, AE - Sharjah">
-      <option value="Salem, IN - Salem">
-      <option value="San Salvador, SV - Comalapa">
-      <option value="Salt Lake City, US - Salt Lake City">
-      <option value="Salzburg, AT - W A Mozart">
-      <option value="Salvador, BR - Luis E Magalhaes">
-      <option value="Salisbury-ocean City, US - Wicomico Regional">
-      <option value="Saltillo, MX - Saltillo">
-      <option value="Salta, AR - Salta">
-      <option value="Salluit, CA - Salluit">
-      <option value="Salalah, OM - Salalah">  <option value="Coimbatore, IN - Peelamedu">
-      <option value="Geneva, CH - Geneve Cointrin">
+
+    <datalist id="airports" >
+      <%# Dynamically populated %>
 
     </datalist>
+
     <button class="swap-btn" type="button" aria-label="Swap" onclick="swapInputs()">
       <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
         <line x1="4" y1="7" x2="24" y2="7" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
@@ -534,12 +520,16 @@
   </div>
 </div>
 
+
 <div class="breadcrumb" >
   Home &raquo; Tourism &raquo; Ipoh Airports
 </div>
 <hr class="line-separator">
 
+
+
 <%= yield %>
+
 
 <script>
   // FLAG SELECTOR FUNCTIONALITY
@@ -566,6 +556,52 @@
     inputFrom.value = inputTo.value;
     inputTo.value = temp;
   }
+
+    // === NEW LOGIC FOR DYNAMIC AIRPORTS AND ROUTES ===
+
+  // 1. Load your JSON. Replace the path below!
+ document.addEventListener('DOMContentLoaded', function() {
+  fetch('/data.json')
+    .then(res => res.json())
+    .then(data => {
+      let routes = data.routes_data ? data.routes_data.routes : data.routes;
+
+      // Updated: Build rich city-airport-code labels for the dropdown
+      function populateAirportsDropdown(routesArr) {
+        const datalist = document.getElementById('airports');
+        if (!datalist) return;
+        const airportSet = new Set();
+        routesArr.forEach(route => {
+          // Departure airport
+          if (
+            route.dep_city_name && route.dep_airport_name && route.dep_city_code
+          ) {
+            // Example: Chennai, IN - Chennai Airport (MAA)
+            airportSet.add(`${route.dep_city_name}, IN - ${route.dep_airport_name} (${route.dep_city_code})`);
+          }
+          // Arrival airport (avoid duplicates)
+          if (
+            route.arr_city_name && route.arr_airport_name && route.arr_city_code
+          ) {
+            airportSet.add(`${route.arr_city_name}, IN - ${route.arr_airport_name} (${route.arr_city_code})`);
+          }
+        });
+        datalist.innerHTML = '';
+        airportSet.forEach(label => {
+          const option = document.createElement('option');
+          option.value = label;
+          datalist.appendChild(option);
+        });
+      }
+
+      populateAirportsDropdown(routes);
+      
+    })
+    .catch(err => {
+      console.error("Error loading flight data:", err);
+    });
+});
+
 </script>
 </body>
 </html>
