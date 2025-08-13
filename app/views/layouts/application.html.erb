@@ -609,7 +609,7 @@
     .then(data => {
       let routes = data.routes_data ? data.routes_data.routes : data.routes;
 
-      // Build array of rich airport/city strings (as before)
+      // Build array with all available city and airport labels
       const airportSet = new Set();
       routes.forEach(route => {
         if (route.dep_city_name && route.dep_airport_name && route.dep_city_code) {
@@ -621,7 +621,7 @@
       });
       const cityAirportLabels = Array.from(airportSet);
 
-      // Setup autocomplete for both inputs
+      // autocomplete for both inputs
       function setupAutocomplete(inputId, dropdownId) {
         const input = document.getElementById(inputId);
         const dropdown = document.getElementById(dropdownId);
@@ -674,30 +674,32 @@
       });
 
 
-//     // === NEW LOGIC FOR DYNAMIC AIRPORTS AND ROUTES ===
+//     
 
-//   // 1. Load your JSON. Replace the path below!
+//   // 1. Load json
+
 //  document.addEventListener('DOMContentLoaded', function() {
 //   fetch('/data.json')
 //     .then(res => res.json())
 //     .then(data => {
 //       let routes = data.routes_data.routes; // getting the routed from data.json
 
-//       // Updated: Build rich city-airport-code labels for the dropdown
+//       // get rotes from json
+
 //       function populateAirportsDropdown(routesArr) {
 //         const datalist = document.getElementById('airports');
 //         if (!datalist) return;
 //         const airportSet = new Set();
 //         routesArr.forEach(route => {
          
-//           // Departure airport
+//           // Dep airport
 //           if (
 //             route.dep_city_name && route.dep_airport_name && route.dep_city_code
 //           ) {
 //             // Example: Chennai, IN - Chennai Airport (MAA)
 //             airportSet.add(`${route.dep_city_name}, IN - ${route.dep_airport_name} (${route.dep_city_code})`);
 //           }
-//           // Arrival airport (avoid duplicates)
+//           // Arr airport 
 //           if (
 //             route.arr_city_name && route.arr_airport_name && route.arr_city_code
 //           ) {
@@ -706,7 +708,7 @@
 //         });
 //         datalist.innerHTML = '';
 //         airportSet.forEach(label => {
-//           const option = document.createElement('option');
+//           const option = document.createElement('option'); 
 //           option.value = label;
 //           datalist.appendChild(option);
 //         });
