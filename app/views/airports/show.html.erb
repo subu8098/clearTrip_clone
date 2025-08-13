@@ -1,69 +1,20 @@
 <h1>Ipoh Airport</h1>
 <div class="main-area">
   <!-- LEFT: MAIN CONTENT -->
-  <div class="content">
+  <div class="content-main">
     <div class="highlight">
       Get amazing offers on flights from Ipoh Airport only at Cleartrip. Enjoy fast, secure booking and hassle-free cancellations at your fingertips. 
       Find more information and the best deals on upcoming flights from Ipoh Airport here. 
     </div>
-    <div class="section">
-      <h2>Ipoh (IPH)</h2>
-      <p>Ipoh (IPH), the gateway to the Ipoh, is a premier aviation hub offering modern facilities and unparalleled services.
-         Conveniently located on Hulhulé Island near the capital, Malé, IPH connects travellers to a network of domestic and international destinations. Whether visiting for leisure or business, the flight from Ipoh airport ensures a smooth and memorable travel experience.</p>
+
+    <div class="content" id="dynamic-content">
+    <% if @airport_data && @airport_data["content"].present? %>
+        <%= CGI.unescapeHTML(@airport_data["content"]).html_safe %>
+      <% else %>
+        <div class="section"><p>No details available.</p></div>
+      <% end %>
     </div>
-    <div class="section">
-      <h2>Facilities At Ipoh (IPH)</h2>
-      <p>Ipoh is equipped with various facilities to maximise passenger comfort and convenience:</p>
-      <ol style="margin-left: -10px;">
-        <li>Modern Terminals: Separate terminals cater to domestic and international flights, ensuring efficient navigation for travellers.</li>
-        <li>Shopping: Explore duty-free outlets featuring a selection of international and local brands.</li>
-        <li>Dining: Enjoy a variety of dining options, from quick snacks to restaurants serving international and Maldivian cuisine.</li>
-        <li>Business Services: Business lounges and meeting spaces offer a comfortable environment for work or relaxation.</li>
-        <li>Free Wi-Fi: Complimentary high-speed Wi-Fi is available throughout the airport to keep passengers connected.</li>
-        <li>Currency Exchange & ATMs: Multiple currency exchange counters and ATMs are conveniently located across the airport.</li>
-        <li>Lost & Found: A dedicated service assists passengers in recovering misplaced items.</li>
-      </ol>
-    </div>
-    <div class="section">
-      <h2>Important Information For Passengers</h2>
-      <ul style="margin-left: -10px;">
-        <li>Check-In Times: Arrive 2-3 hours before domestic flights and 3-4 hours before international flights to complete check-in, security, and immigration.</li>
-        <li>Baggage Policy: Check your airline’s baggage policy for restrictions on size and weight to avoid additional charges.
-            Travel Documents: Ensure your boarding pass, passport, and required visas are readily accessible.</li>
-        <li>Security Procedures: Prepare for screening by removing electronic devices and adhering to liquid restrictions.</li>
-        <li>Lost & Found: For assistance with misplaced items, contact the Lost & Found department or visit the dedicated counter.</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>Travel Tips For Ipoh (IPH)</h2>
-      <ol style="margin-left: -10px;">
-        <li>Arrive Early: Allow extra time to navigate the airport and complete formalities.</li>
-        <li>Stay Hydrated: Use water stations or purchase bottled water to stay refreshed in the tropical climate.</li>
-        <li>Check Flight Status: Stay updated on flight schedules via airport displays or online platforms.</li>
-        <li>Utilise Lounges: Relax in premium lounges to enhance comfort, especially during layovers.</li>
-        <li>Stay Connected: Use free Wi-Fi to coordinate travel plans and check for updates.</li>
-      </ol>
-    </div>
-    <div class="section">
-      <h2>Disclaimer</h2>
-      <p>The information provided is for general guidance and is subject to change.
-         Passengers should verify flight schedules and airport policies with relevant authorities.</p>
-    </div>
-    <div class="section">
-      <h2>FAQs On Ipoh (IPH)</h2>
-      <ol style="margin-left: -10px;">
-        <li>What are the check-in procedures at IPH airport?<br>
-            Check-in typically begins 2-3 hours before domestic flights and 3-4 hours before international flights. Passengers must carry their boarding pass, passport, and any required visas.</li>
-        <li>Is free Wi-Fi available at Ipoh?<br>
-            Yes, complimentary high-speed Wi-Fi is available throughout the airport.</li>
-        <li>What are the baggage allowances at IPH airport?<br>
-            Baggage policies vary by airline. Hand luggage and checked baggage allowances depend on the carrier’s specific guidelines.</li>
-        <li>How do I go through security checks at IPH airport?<br>
-            Security screenings are mandatory. Be prepared to remove electronic devices and comply with liquid restrictions.</li>
-        <li>What if I lose an item at Ipoh?<br>
-            Visit the Lost & Found counter or contact the airport’s support team to recover lost belongings.</li>
-      </ol>
-    </div>
+
     <div class="section">
       <h2>Information Of Ipoh Airport</h2>
       <table class="info-table" ,style="height: 100%;">
@@ -81,22 +32,30 @@
   <!-- SIDEBAR -->
   <div class="sidebar">
     <%= image_tag 'ad-banner.png', alt: 'EzCancel Ad' %>
-    <h3>Top Domestic Routes</h3>
-    <ul>
-      <li>Al Ain Kozhikode Flights</li>
-      <li>Addis Ababa Bangalore Flights</li>
-      <li>Addis Ababa Mumbai Flights</li>
-      <li>Addis Ababa New Delhi Flights</li>
-      <li>Addis Ababa Chennai Flights</li>
-    </ul>
-    <h3>Top International Routes</h3>
-    <ul>
-        <li>AL Ain Kozhikode Flights</li>
-      <li>Addis Ababa Bangalore Flights</li>
-        <li>Addis Ababa Mumbai Flights</li>
-      <li>Addis Ababa New Delhi Flights</li>
-      <li>Addis Ababa Chennai Flights</li>
-    </ul>
+    
+      <% if @airport_data && @airport_data["domestic_flight_schedules"].present? %>
+        <h3>Top Domestic Routes</h3>
+        <ul>
+          <% @airport_data["domestic_flight_schedules"].each do |route| %>
+            <li style="padding-top: 6px;">
+                <%= link_to(route["text"], route["href"], style: "color: #2c69eeff; text-decoration: none;") %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+  
+      <% if @airport_data && @airport_data["international_flight_schedules"].present? %>
+        <h3>Top International Routes</h3>
+        <ul>
+          <% @airport_data["international_flight_schedules"].each do |route| %>
+            <li style="padding-top: 6px;">
+                <%= link_to(route["text"], route["href"], style: "color: #2c69eeff; text-decoration: none;") %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+
     <h3>Top Airlines</h3>
     <ul class="sidebar-airlines-list">
       <li>
