@@ -431,6 +431,38 @@
   }
 }
 
+.dropdown-list {
+  position: absolute;
+  left: 0;
+  top: 44px; /* below input */
+  background: #fff;
+  border: 1px solid #ddd;
+  max-height: 260px;
+  overflow-y: auto;
+  width: 100%;
+  min-width: 240px;
+  box-shadow: 0 2px 12px #0002;
+  z-index: 1200;
+  display: none; /* Hide by default */
+}
+
+.dropdown-list .dropdown-item {
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.dropdown-list .dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-list .dropdown-item:hover,
+.dropdown-list .dropdown-item.active {
+  background: #3577ec;
+  color: #fff;
+}
+
   </style>
 </head>
 
@@ -472,12 +504,19 @@
       <option selected>One way</option>
       <option>Round trip</option>
     </select>
-    <input list="airports" id="input-from" placeholder="Any Airport or City">
 
-    <datalist id="airports" >
-      <%# Dynamically populated %>
+    <%# <input list="airports" id="input-from" placeholder="Any Airport or City">
 
-    </datalist>
+        <datalist id="airports" >
+          <%# Dynamically populated %>
+
+        </datalist>
+    
+
+    <div style="position:relative; max-width:340px;">
+      <input type="text" id="input-from" autocomplete="off" placeholder="Any Airport or City">
+      <div id="dropdown-from" class="dropdown-list"></div>
+    </div>
 
     <button class="swap-btn" type="button" aria-label="Swap" onclick="swapInputs()">
       <svg width="35" height="20" viewBox="0 0 30 21" xmlns="http://www.w3.org/2000/svg">
@@ -487,7 +526,12 @@
         <polyline points="8,10 4,13 8,16" fill="none" stroke="#3577ec" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </button>
-    <input list="airports" id="input-to" placeholder="Any Airport or City">
+
+    <div style="position:relative; max-width:340px;">
+      <input type="text" id="input-to" autocomplete="off" placeholder="Any Airport or City">
+      <div id="dropdown-to" class="dropdown-list"></div>
+    </div>    
+
     <input type="date" style="font-weight:100;">
     <input type="text" id="return-date" placeholder="Return On">
     <script>
@@ -557,50 +601,124 @@
     inputTo.value = temp;
   }
 
-    // === NEW LOGIC FOR DYNAMIC AIRPORTS AND ROUTES ===
+  //without datalist using didv we did the dropdown here
 
-  // 1. Load your JSON. Replace the path below!
- document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
   fetch('/data.json')
     .then(res => res.json())
     .then(data => {
       let routes = data.routes_data ? data.routes_data.routes : data.routes;
 
-      // Updated: Build rich city-airport-code labels for the dropdown
-      function populateAirportsDropdown(routesArr) {
-        const datalist = document.getElementById('airports');
-        if (!datalist) return;
-        const airportSet = new Set();
-        routesArr.forEach(route => {
-          // Departure airport
-          if (
-            route.dep_city_name && route.dep_airport_name && route.dep_city_code
-          ) {
-            // Example: Chennai, IN - Chennai Airport (MAA)
-            airportSet.add(`${route.dep_city_name}, IN - ${route.dep_airport_name} (${route.dep_city_code})`);
-          }
-          // Arrival airport (avoid duplicates)
-          if (
-            route.arr_city_name && route.arr_airport_name && route.arr_city_code
-          ) {
-            airportSet.add(`${route.arr_city_name}, IN - ${route.arr_airport_name} (${route.arr_city_code})`);
-          }
-        });
-        datalist.innerHTML = '';
-        airportSet.forEach(label => {
-          const option = document.createElement('option');
-          option.value = label;
-          datalist.appendChild(option);
-        });
-      }
+      // Build array of rich airport/city strings (as before)
+      const airportSet = new Set();
+      routes.forEach(route => {
+        if (route.dep_city_name && route.dep_airport_name && route.dep_city_code) {
+          airportSet.add(`${route.dep_city_name}, IN - ${route.dep_airport_name} (${route.dep_city_code})`);
+        }
+        if (route.arr_city_name && route.arr_airport_name && route.arr_city_code) {
+          airportSet.add(`${route.arr_city_name}, IN - ${route.arr_airport_name} (${route.arr_city_code})`);
+        }
+      });
+      const cityAirportLabels = Array.from(airportSet);
 
-      populateAirportsDropdown(routes);
+      // Setup autocomplete for both inputs
+      function setupAutocomplete(inputId, dropdownId) {
+        const input = document.getElementById(inputId);
+        const dropdown = document.getElementById(dropdownId);
+
+        input.addEventListener('input', function(e) {
+          const val = e.target.value.trim().toLowerCase();
+          dropdown.innerHTML = '';
+          if (!val) {
+            dropdown.style.display = 'none';
+            return;
+          }
+          const matches = cityAirportLabels.filter(label =>
+            label.toLowerCase().includes(val)
+          ).slice(0, 10);
+
+          if (matches.length === 0) {
+            dropdown.style.display = 'none';
+            return;
+          }
+
+          matches.forEach(label => {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item';
+            item.textContent = label;
+            item.addEventListener('mousedown', function() {
+              input.value = label;
+              dropdown.style.display = 'none';
+            });
+            dropdown.appendChild(item);
+          });
+          dropdown.style.display = 'block';
+        });
+
+        input.addEventListener('blur', function() {
+          setTimeout(() => { dropdown.style.display = 'none'; }, 150);
+        });
+
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') dropdown.style.display = 'none';
+        });
+            }
+
+            // Call setupAutocomplete for both inputs
+            setupAutocomplete('input-from', 'dropdown-from');
+            setupAutocomplete('input-to',   'dropdown-to');
+          })
+          .catch(err => {
+            console.error("Error loading flight data:", err);
+          });
+      });
+
+
+//     // === NEW LOGIC FOR DYNAMIC AIRPORTS AND ROUTES ===
+
+//   // 1. Load your JSON. Replace the path below!
+//  document.addEventListener('DOMContentLoaded', function() {
+//   fetch('/data.json')
+//     .then(res => res.json())
+//     .then(data => {
+//       let routes = data.routes_data.routes; // getting the routed from data.json
+
+//       // Updated: Build rich city-airport-code labels for the dropdown
+//       function populateAirportsDropdown(routesArr) {
+//         const datalist = document.getElementById('airports');
+//         if (!datalist) return;
+//         const airportSet = new Set();
+//         routesArr.forEach(route => {
+         
+//           // Departure airport
+//           if (
+//             route.dep_city_name && route.dep_airport_name && route.dep_city_code
+//           ) {
+//             // Example: Chennai, IN - Chennai Airport (MAA)
+//             airportSet.add(`${route.dep_city_name}, IN - ${route.dep_airport_name} (${route.dep_city_code})`);
+//           }
+//           // Arrival airport (avoid duplicates)
+//           if (
+//             route.arr_city_name && route.arr_airport_name && route.arr_city_code
+//           ) {
+//             airportSet.add(`${route.arr_city_name}, IN - ${route.arr_airport_name} (${route.arr_city_code})`);
+//           }
+//         });
+//         datalist.innerHTML = '';
+//         airportSet.forEach(label => {
+//           const option = document.createElement('option');
+//           option.value = label;
+//           datalist.appendChild(option);
+//         });
+//       }
+
+//       populateAirportsDropdown(routes);
       
-    })
-    .catch(err => {
-      console.error("Error loading flight data:", err);
-    });
-});
+//     })
+//     .catch(err => {
+//       console.error("Error loading flight data:", err);
+//     });
+// });
 
 </script>
 </body>
