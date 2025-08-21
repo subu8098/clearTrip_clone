@@ -1,0 +1,19 @@
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/erb-5.0.2/ext/erb/escape
+/home/dell/.rbenv/versions/3.2.9/bin/ruby extconf.rb
+checking for rb_ext_ractor_safe() in ruby.h... yes
+creating Makefile
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-ioccz1 sitelibdir\=./.gem.20250821-144103-ioccz1 clean
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-ioccz1 sitelibdir\=./.gem.20250821-144103-ioccz1
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-ioccz1 sitelibdir\=./.gem.20250821-144103-ioccz1 install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250821-144103-ioccz1/erb
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/erb-5.0.2/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-ioccz1 sitelibdir\=./.gem.20250821-144103-ioccz1 clean

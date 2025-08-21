@@ -1,0 +1,19 @@
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+/home/dell/.rbenv/versions/3.2.9/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-gqvxe sitelibdir\=./.gem.20250821-144103-gqvxe clean
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-gqvxe sitelibdir\=./.gem.20250821-144103-gqvxe
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-gqvxe sitelibdir\=./.gem.20250821-144103-gqvxe install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20250821-144103-gqvxe/debug
+
+current directory: /home/dell/cleartrip_airport_page/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250821-144103-gqvxe sitelibdir\=./.gem.20250821-144103-gqvxe clean

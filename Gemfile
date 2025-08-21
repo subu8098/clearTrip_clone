@@ -6,6 +6,7 @@ gem "rails", "~> 8.0.2"
 gem "propshaft"
 gem 'httparty'
 gem 'nokogiri'
+gem 'whenever', require: false
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
