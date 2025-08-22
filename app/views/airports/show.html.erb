@@ -1,4 +1,11 @@
-<h1>Ipoh Airport</h1>
+<h1>
+  <% if params[:key].present? %>
+    <%= params[:key].to_s.sub(/-airport$/, '').capitalize + ' Airport' %>
+  <% else %>
+    Airport Details
+  <% end %>
+</h1>
+
 <div class="main-area">
   <!-- LEFT: MAIN CONTENT -->
   <div class="content-main">
